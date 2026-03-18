@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotel Mangal Tara</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --warm-white: #FDFAF4;
+    --sand: #E8DFC9;
+    --gold: #B8935A;
+    --gold-light: #D4AA72;
+    --deep: #1C1610;
+    --charcoal: #3A3228;
+    --text: #4A3F34;
+    --muted: #8A7D6E;
+    --accent: #7B9E82;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--warm-white);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(253,250,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184,147,90,0.15);
+    transition: padding 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--deep);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; align-items: center; gap: 36px; }
+  .nav-links a {
+    font-size: 13px; font-weight: 400; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--charcoal);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-btn {
+    background: var(--deep); color: var(--cream) !important;
+    padding: 10px 24px; border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+  .nav-btn:hover { background: var(--gold) !important; color: var(--deep) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 64px 80px 80px;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--sand); border-radius: 100px;
+    padding: 8px 18px; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.06em; color: var(--charcoal);
+    text-decoration: none; margin-bottom: 32px;
+    width: fit-content; transition: background 0.2s;
+  }
+  .hero-badge:hover { background: var(--gold-light); }
+  .hero-badge::before {
+    content: '★'; color: var(--gold); font-size: 14px;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 6vw, 84px);
+    font-weight: 300; line-height: 1.05;
+    color: var(--deep); margin-bottom: 28px;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-desc {
+    font-size: 16px; font-weight: 300;
+    color: var(--muted); max-width: 400px;
+    margin-bottom: 48px; line-height: 1.8;
+  }
+  .hero-actions { display: flex; align-items: center; gap: 20px; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--deep); color: var(--cream);
+    padding: 16px 40px; border-radius: 2px;
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.25s;
+  }
+  .btn-primary:hover { background: var(--gold); color: var(--deep); transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--muted); font-size: 13px;
+    letter-spacing: 0.06em; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--gold); }
+  .btn-secondary::after { content: '↗'; font-size: 16px; }
+
+  .hero-right {
+    position: relative; overflow: hidden;
+    background: var(--sand);
+  }
+  .hero-right img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block;
+  }
+  .hero-right::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(253,250,244,0.2), transparent);
+  }
+  .hero-floating {
+    position: absolute; bottom: 40px; left: 40px;
+    background: rgba(253,250,244,0.95);
+    backdrop-filter: blur(8px);
+    padding: 20px 28px; border-radius: 4px;
+    border-left: 3px solid var(--gold);
+    z-index: 2;
+  }
+  .hero-floating .label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .hero-floating .value { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--deep); }
+  .hero-floating .sublabel { font-size: 12px; color: var(--muted); }
+
+  /* ── SECTION HEADER ── */
+  .section-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 300; line-height: 1.1;
+    color: var(--deep);
+  }
+  .section-desc {
+    font-size: 16px; font-weight: 300;
+    color: var(--muted); line-height: 1.8;
+    max-width: 520px; margin-top: 20px;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+  }
+  .about-image {
+    position: relative; overflow: hidden;
+  }
+  .about-image img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.6s;
+  }
+  .about-image:hover img { transform: scale(1.03); }
+  .about-content {
+    background: var(--deep); color: var(--cream);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 80px 80px 64px;
+  }
+  .about-content .section-label { color: var(--gold-light); }
+  .about-content .section-title { color: var(--cream); }
+  .about-content .section-desc { color: rgba(245,240,232,0.7); max-width: 460px; }
+  .about-feature {
+    margin-top: 48px; display: flex; flex-direction: column; gap: 24px;
+  }
+  .feature-item {
+    display: flex; gap: 20px; align-items: flex-start;
+    padding: 20px 24px;
+    border: 1px solid rgba(184,147,90,0.2);
+    border-radius: 4px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .feature-item:hover {
+    border-color: var(--gold);
+    background: rgba(184,147,90,0.05);
+  }
+  .feature-icon {
+    width: 40px; height: 40px; border-radius: 2px;
+    background: var(--gold); display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .feature-text h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 500; color: var(--cream);
+    margin-bottom: 4px;
+  }
+  .feature-text p { font-size: 13px; color: rgba(245,240,232,0.6); }
+
+  /* ── AMENITIES ── */
+  .amenities { padding: 100px 80px; background: var(--warm-white); }
+  .amenities-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; margin-bottom: 64px;
+  }
+  .amenities-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2px; background: var(--sand);
+    border: 2px solid var(--sand);
+  }
+  .amenity-card {
+    background: var(--warm-white);
+    padding: 48px 36px;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .amenity-card:hover { background: var(--cream); }
+  .amenity-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 300;
+    color: var(--sand); line-height: 1;
+    margin-bottom: 20px;
+    transition: color 0.3s;
+  }
+  .amenity-card:hover .amenity-num { color: var(--gold-light); }
+  .amenity-icon { font-size: 28px; margin-bottom: 16px; }
+  .amenity-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 500;
+    color: var(--deep); margin-bottom: 10px;
+  }
+  .amenity-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .amenity-card::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px; background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .amenity-card:hover::after { transform: scaleX(1); }
+
+  /* ── GALLERY ── */
+  .gallery { padding: 0 80px 100px; }
+  .gallery-header { margin-bottom: 48px; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 300px 300px;
+    gap: 12px;
+  }
+  .gallery-item {
+    overflow: hidden; position: relative;
+    border-radius: 2px;
+  }
+  .gallery-item:first-child { grid-row: span 2; }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.5s;
+  }
+  .gallery-item:hover img { transform: scale(1.06); }
+  .gallery-item::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(28,22,16,0.4), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .gallery-item:hover::after { opacity: 1; }
+
+  /* ── GUESTS / TESTIMONIALS ── */
+  .guests { padding: 100px 80px; background: var(--cream); }
+  .guests-header { text-align: center; margin-bottom: 64px; }
+  .guests-header .section-desc { margin: 20px auto 0; }
+  .guests-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .guest-card {
+    background: var(--warm-white);
+    padding: 40px; border-radius: 4px;
+    border: 1px solid var(--sand);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+  .guest-card:hover {
+    border-color: var(--gold-light);
+    box-shadow: 0 12px 40px rgba(28,22,16,0.08);
+    transform: translateY(-4px);
+  }
+  .guest-stars { color: var(--gold); font-size: 14px; margin-bottom: 20px; }
+  .guest-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 300; font-style: italic;
+    color: var(--deep); line-height: 1.6; margin-bottom: 28px;
+  }
+  .guest-author { display: flex; align-items: center; gap: 14px; }
+  .guest-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--sand); display: flex; align-items: center;
+    justify-content: center; font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; color: var(--gold); font-weight: 500;
+    overflow: hidden;
+  }
+  .guest-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .guest-name { font-size: 14px; font-weight: 500; color: var(--deep); }
+  .guest-meta { font-size: 12px; color: var(--muted); }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 100px 80px;
+    background: var(--deep);
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 80px;
+  }
+  .cta-content .section-label { color: var(--gold-light); }
+  .cta-content .section-title { color: var(--cream); font-size: clamp(36px, 4vw, 64px); }
+  .cta-content .section-desc { color: rgba(245,240,232,0.65); }
+  .cta-action { margin-top: 48px; display: flex; gap: 20px; align-items: center; }
+  .btn-primary-light {
+    display: inline-block;
+    background: var(--gold); color: var(--deep);
+    padding: 16px 40px; border-radius: 2px;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.25s;
+  }
+  .btn-primary-light:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .cta-image {
+    position: relative; height: 500px; border-radius: 4px; overflow: hidden;
+  }
+  .cta-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cta-image::before {
+    content: ''; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(135deg, rgba(184,147,90,0.3), transparent);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #130F0A; padding: 80px 80px 40px;
+    color: var(--cream);
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    gap: 80px; margin-bottom: 64px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(245,240,232,0.1);
+  }
+  .footer-brand .nav-logo { font-size: 26px; display: block; margin-bottom: 16px; }
+  .footer-desc { font-size: 14px; color: rgba(245,240,232,0.5); line-height: 1.8; max-width: 280px; }
+  .footer-social { display: flex; gap: 16px; margin-top: 28px; }
+  .social-link {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(245,240,232,0.2);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(245,240,232,0.5);
+    text-decoration: none; font-size: 16px;
+    transition: all 0.2s;
+  }
+  .social-link:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(184,147,90,0.1);
+  }
+  .footer-col h4 {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold-light);
+    margin-bottom: 24px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .footer-col ul li a {
+    color: rgba(245,240,232,0.5); text-decoration: none;
+    font-size: 14px; transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--cream); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy { font-size: 13px; color: rgba(245,240,232,0.3); }
+
+  /* ── MAP STRIP ── */
+  .contact-strip {
+    padding: 60px 80px;
+    background: var(--cream);
+    display: flex; gap: 48px; align-items: center;
+    flex-wrap: wrap;
+  }
+  .contact-item { display: flex; align-items: center; gap: 16px; }
+  .contact-icon {
+    width: 48px; height: 48px;
+    background: var(--deep); border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .contact-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 4px; }
+  .contact-value { font-size: 15px; font-weight: 400; color: var(--deep); }
+  .contact-value a { color: var(--deep); text-decoration: none; }
+  .contact-value a:hover { color: var(--gold); }
+  .contact-divider { width: 1px; height: 60px; background: var(--sand); }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 1024px) {
+    .hero, .about, .cta-section { grid-template-columns: 1fr; }
+    .hero-right { height: 60vw; }
+    .about-content { padding: 64px 48px; }
+    .amenities-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .gallery-item:first-child { grid-row: span 1; }
+    .guests-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 48px; }
+    nav { padding: 16px 32px; }
+    .amenities, .gallery, .guests, .cta-section, footer, .contact-strip { padding-left: 48px; padding-right: 48px; }
+    .hero-left { padding: 60px 48px; }
+  }
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .amenities-grid, .footer-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .cta-image { display: none; }
+    .amenities, .gallery, .guests, .cta-section, footer, .contact-strip { padding-left: 24px; padding-right: 24px; }
+    .hero-left { padding: 40px 24px; }
+    .contact-strip { flex-direction: column; }
+    .contact-divider { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Hotel <span>Mangal Tara</span></a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#amenities">Amenities</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#guests">Guests</a>
+    <a href="https://wa.me/919528684754" target="_blank" class="nav-btn">Book Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <a href="https://maps.app.goo.gl/GusFDu1Aiw972tv56" class="hero-badge" target="_blank">
+      4.8 on Google Reviews
+    </a>
+    <h1 class="hero-title">
+      Hotel<br>
+      <em>Mangal</em><br>
+      Tara
+    </h1>
+    <p class="hero-desc">Safe &amp; Comfortable. Budget Stay. Owner owned and operated with love and care for our guests.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/919528684754" class="btn-primary" target="_blank">Book Now</a>
+      <a href="https://maps.app.goo.gl/YBCw28izbUPuZG7L7" class="btn-secondary" target="_blank">Find Us</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="./public/images/516754101_717859514330621_9081344347505550485_n.jpg" alt="Hotel Mangal Tara">
+    <div class="hero-floating">
+      <div class="label">Our Promise</div>
+      <div class="value">8 Rooms</div>
+      <div class="sublabel">CCTV Secured · Family Operated</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-image">
+    <img src="./public/images/IMG-20251224-WA0018.jpg" alt="Common seating area at Hotel Mangal Tara">
+  </div>
+  <div class="about-content">
+    <div class="section-label">Our Story</div>
+    <h2 class="section-title">A Budget Friendly &amp; Clean Experience</h2>
+    <p class="section-desc">Hotel Mangal Tara is a locally owned and family-operated hotel. We are dedicated to providing our guests with a comfortable, welcoming, and memorable stay. By choosing to stay with us, you are supporting a local family and the community we proudly serve.</p>
+    <div class="about-feature fade-up">
+      <div class="feature-item">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-text">
+          <h4>8 Rooms with CCTV Surveillance</h4>
+          <p>Your safety is our priority. All areas are monitored 24/7 for a secure stay.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🌿</div>
+        <div class="feature-text">
+          <h4>Common Seating Area</h4>
+          <p>Enjoy nature, take photographs, and relax in our beautiful outdoor space.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="amenities" id="amenities">
+  <div class="amenities-header fade-up">
+    <div>
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title">Amenities</h2>
+    </div>
+    <div style="max-width:340px; text-align:right;">
+      <p class="section-desc" style="text-align:right;">Call us to book your stay. Most popular amenities loved by our guests.</p>
+      <a href="https://wa.me/919528684754" class="btn-primary" style="display:inline-block; margin-top:20px;" target="_blank">Book Now</a>
+    </div>
+  </div>
+  <div class="amenities-grid fade-up">
+    <div class="amenity-card">
+      <div class="amenity-num">01</div>
+      <div class="amenity-icon">🛏️</div>
+      <h3>Clean Room</h3>
+      <p>Clean and sanitized rooms prepared with care for every guest's comfort.</p>
+    </div>
+    <div class="amenity-card">
+      <div class="amenity-num">02</div>
+      <div class="amenity-icon">🛣️</div>
+      <h3>Main Road Location</h3>
+      <p>Conveniently located on the main road for easy access and connectivity.</p>
+    </div>
+    <div class="amenity-card">
+      <div class="amenity-num">03</div>
+      <div class="amenity-icon">🌳</div>
+      <h3>Common Seating Area</h3>
+      <p>A beautiful outdoor seating area to relax and enjoy the natural surroundings.</p>
+    </div>
+    <div class="amenity-card">
+      <div class="amenity-num">04</div>
+      <div class="amenity-icon">📶</div>
+      <h3>Free WiFi &amp; Parking</h3>
+      <p>Complimentary high-speed WiFi and free parking available for all guests.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="gallery-header fade-up">
+    <div class="section-label">Our Space</div>
+    <h2 class="section-title">A Glimpse of Your Stay</h2>
+  </div>
+  <div class="gallery-grid fade-up">
+    <div class="gallery-item">
+      <img src="./public/images/2022-06-30.webp" alt="Guest at hotel Mangal Tara smiling in common seating area">
+    </div>
+    <div class="gallery-item">
+      <img src="./public/images/2025-05-09.webp" alt="Clean bathroom at Hotel Mangal Tara">
+    </div>
+    <div class="gallery-item">
+      <img src="./public/images/IMG-20251224-WA0019.jpg" alt="Hotel main road">
+    </div>
+    <div class="gallery-item">
+      <img src="./public/images/IMG-20251224-WA0002.jpg" alt="Clean room at Hotel Mangal Tara">
+    </div>
+    <div class="gallery-item">
+      <img src="./public/images/clean-room-2.webp" alt="Clean room at Hotel Mangal Tara">
+    </div>
+  </div>
+</section>
+
+<!-- GUESTS -->
+<section class="guests" id="guests">
+  <div class="guests-header fade-up">
+    <div class="section-label">Happy Guests</div>
+    <h2 class="section-title">Real Results from Real Guests</h2>
+    <p class="section-desc">Our goal is to make every guest feel at home by providing a comfortable, warm, and pleasant stay.</p>
+  </div>
+  <div class="guests-grid fade-up">
+    <div class="guest-card">
+      <div class="guest-stars">★★★★★</div>
+      <p class="guest-text">"The location was great, and the atmosphere with the hotel staff was incredibly friendly. They were genuinely caring and treated every guest with warmth and kindness. It truly felt like home with them. We’re from the South and wanted to cook our own food, they not only agreed but also helped us with the cooking, which we really appreciated."</p>
+      <div class="guest-author">
+        <div class="guest-avatar">
+          <img src="https://lh3.googleusercontent.com/a-/ALV-UjU3ZUc2FsRCcl9HvgnD5xVKez_yi9Xaq61M3Sshdk8FtHVou3tx=s80-rp-mo-br100" alt="Guest">
+        </div>
+        <div>
+          <div class="guest-name">Rishik Adepu</div>
+          <div class="guest-meta">Guest · Verified Stay</div>
+        </div>
+      </div>
+    </div>
+    <div class="guest-card">
+      <div class="guest-stars">★★★★★</div>
+      <p class="guest-text">"Excellent service and helpful staff... And the owner of this property Rajvansh is really humble and supportive with guest."</p>
+      <div class="guest-author">
+        <div class="guest-avatar">
+          <img src="https://lh3.googleusercontent.com/a-/ALV-UjWkJgLIfS3jv3Xowd7R1KIgnjTUDX5-XiCCemyrhqIc3VwsDVg=s80-rp-mo-br100" alt="Guest">
+        </div>
+        <div>
+          <div class="guest-name">Trips Plandia</div>
+          <div class="guest-meta">Group Guest · Verified Stay</div>
+        </div>
+      </div>
+    </div>
+    <div class="guest-card">
+      <div class="guest-stars">★★★★★</div>
+      <p class="guest-text">"Beautiful location around 2km from Uttarakashi town, very good rooms and home made food. Feel you visit some relatives home. Stayed on 12th Oct 2024 on my way to Gangothri."</p>
+      <div class="guest-author">
+        <div class="guest-avatar">
+          <img src="https://lh3.googleusercontent.com/a/ACg8ocKIj9cafazGxfnk5Afx-sOMJKDUmTJJdHczgCk6v0Rkn6uzVQ=s80-rp-mo-ba3-br100" alt="Guest">
+        </div>
+        <div>
+          <div class="guest-name">Srinivas</div>
+          <div class="guest-meta">Family Guest · Verified Stay</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT STRIP -->
+<div class="contact-strip fade-up">
+  <div class="contact-item">
+    <div class="contact-icon">📍</div>
+    <div>
+      <div class="contact-label">Address</div>
+      <div class="contact-value"><a href="https://maps.app.goo.gl/YBCw28izbUPuZG7L7" target="_blank">Gangotri Road, Ganeshpur, Uttarkashi, Uttarakhand</a></div>
+    </div>
+  </div>
+  <div class="contact-divider"></div>
+  <div class="contact-item">
+    <div class="contact-icon">📞</div>
+    <div>
+      <div class="contact-label">Phone</div>
+      <div class="contact-value"><a href="tel:+919528684754">+91 95286 84754</a></div>
+    </div>
+  </div>
+  <div class="contact-divider"></div>
+  <div class="contact-item">
+    <div class="contact-icon">⭐</div>
+    <div>
+      <div class="contact-label">Rating</div>
+      <div class="contact-value"><a href="https://maps.app.goo.gl/GusFDu1Aiw972tv56" target="_blank">4.8 / 5 on Google Maps</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content fade-up">
+    <div class="section-label">Owned by Local Family</div>
+    <h2 class="section-title">Family-run hotel committed to every guest.</h2>
+    <p class="section-desc">Supporting a local family and the community. Every stay makes a difference to us, and we make every stay matter to you.</p>
+    <div class="cta-action">
+      <a href="https://wa.me/919528684754" class="btn-primary-light" target="_blank">Book Your Stay</a>
+      <a href="tel:+919528684754" style="color:rgba(245,240,232,0.6);font-size:14px;text-decoration:none;">or call us directly</a>
+    </div>
+  </div>
+  <div class="cta-image fade-up">
+    <img src="./public/images/2023-05-13.webp" alt="Hotel Mangal Tara">
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="nav-logo">Hotel <span>Mangal Tara</span></span>
+      <p class="footer-desc">A family-run budget hotel on the Gangotri road in Uttarkashi, Uttarakhand. Safe, clean, and operated with love.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/p/Hotel-Mangal-Tara-Gangotri-road-Ganeshpur-uttarkashi-100083197358633/" class="social-link" target="_blank" aria-label="Facebook">f</a>
+        <a href="https://www.instagram.com/hotel_mangal_tara_gangotri/" class="social-link" target="_blank" aria-label="Instagram">📷</a>
+        <a href="https://maps.app.goo.gl/GusFDu1Aiw972tv56" class="social-link" target="_blank" aria-label="Google Maps">📍</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#amenities">Amenities</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#guests">Guest Reviews</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+919528684754">+91 95286 84754</a></li>
+        <li><a href="https://maps.app.goo.gl/YBCw28izbUPuZG7L7" target="_blank">Gangotri Road, Ganeshpur</a></li>
+        <li><a href="https://maps.app.goo.gl/YBCw28izbUPuZG7L7" target="_blank">Uttarkashi, Uttarakhand</a></li>
+        <li><a href="https://wa.me/919528684754" target="_blank">Book Now</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Hotel Mangal Tara. All rights reserved.</div>
+    <div class="footer-copy">Gangotri Road, Uttarkashi · India</div>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Smooth nav shrink on scroll
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.padding =
+      window.scrollY > 60 ? '12px 48px' : '20px 48px';
+  });
+</script>
+</body>
+</html>
